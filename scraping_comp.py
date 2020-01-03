@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 
 # target URL to scrap
-url = "https://www.goibibo.com/hotels/hotels-in-shimla-ct/"
+url = "https://kratomcrazy.com/"
 
 # headers
 headers = {
@@ -22,7 +22,7 @@ response = requests.request("GET", url, headers=headers)
 data = BeautifulSoup(response.text, 'html.parser')
 print(data)
 
-cards_data = data.find_all('div', attrs={'class', 'width100 fl htlListSeo hotel-tile-srp-container hotel-tile-srp-container-template new-htl-design-tile-main-block'})
+cards_data = data.find_all('div', attrs={'class', 'cc-best'})
 
 # total number of cards
 print('Total Number of Cards Found : ', len(cards_data))
@@ -65,6 +65,7 @@ for card in cards_data:
 # create a data frame from the list of dictionaries
 dataFrame = pd.DataFrame.from_dict(scraped_data)
 
-# save the scraped data as CSV file
-dataFrame.to_csv('hotels_data.csv', index=False)
+# save the scraped data as CSV or Html file
+
+dataFrame.csv('hotels_data.csv', index=False)
 dataFrame.to_html('hotels_data.html', index=False)
